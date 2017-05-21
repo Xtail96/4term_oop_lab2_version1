@@ -5,11 +5,11 @@
 class Ellipse : public Shape
 {
 protected:
-    double minHalfAxis;
-    double maxHalfAxis;
+    double aHalfAxis;
+    double bHalfAxis;
 public:
-    Ellipse(double x = 0, double y = 0, double angle = 0, double scale = 1, std::string color = "#000", double minHalfAxis = 1, double maxHalfAxis = 2)
-        : Shape(x, y, angle, scale, color), minHalfAxis(minHalfAxis), maxHalfAxis(maxHalfAxis){}
+    Ellipse(double x, double y, double aHalfAxis, double bHalfAxis, double angle = 0, double scale = 1, std::string color = "#000")
+        : Shape(x, y, angle, scale, color), aHalfAxis(aHalfAxis), bHalfAxis(bHalfAxis){}
     virtual ~Ellipse() {}
     void setAxis(std::pair<double, double> p);
     std::pair<double, double> getAxis();
@@ -19,7 +19,11 @@ public:
     double getPerimetr() const  override;
     double getArea() override;
 
+    int intersect(Shape &s2) const override;
+
     void print(std::ostream &os) override;
+
+    bool isPointOnBorder(const Point &p) const override;
 };
 
 #endif // ELLIPSE_H
